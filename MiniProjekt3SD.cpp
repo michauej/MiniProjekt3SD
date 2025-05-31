@@ -1,7 +1,8 @@
 #include <iostream>
 #include "OpenAddressingHashTable.h"
+#include "AvlHashTable.h"
 
-void printMenu() {
+void printMenu(HashTable& hashTable) {
     std::cout << "\n--- MENU ---\n";
     std::cout << "1. Dodaj (insert)\n";
     std::cout << "2. Wyszukaj (search)\n";
@@ -10,17 +11,10 @@ void printMenu() {
     std::cout << "Wybierz opcje: ";
 }
 
-int main() {
-    int size;
-    std::cout << "Podaj rozmiar tablicy mieszajacej: ";
-    std::cin >> size;
-
-    OpenAddressingHashTable hashTable(size);
-
+void menu(HashTable& hashTable) {
     int choice, key, value;
-
     do {
-        printMenu();
+        printMenu(hashTable);
         std::cin >> choice;
 
         switch (choice) {
@@ -50,8 +44,37 @@ int main() {
             break;
         default:
             std::cout << "Niepoprawna opcja.\n";
+            break;
         }
     } while (choice != 4);
+}
+
+int main() {
+    int size;
+    std::cout << "Podaj rozmiar tablicy mieszajacej: ";
+    std::cin >> size;
+
+    std::cout << "1. open addressing\n";
+    std::cout << "2. avl\n";
+    std::cout << "Wybierz rodzaj tablicy: ";
+    int whichHashTable;
+    std::cin >> whichHashTable;
+
+    OpenAddressingHashTable openTable(size);
+    AvlHashTable avlTable(size);
+
+    switch (whichHashTable) {
+    case 1:
+        menu(openTable);
+        break;
+    case 2:
+        menu(avlTable);
+        break;
+    default:
+        std::cout << "Niepoprawny wybor, domyslnie uzywam AVL.\n";
+        menu(avlTable);
+        break;
+    }
 
     return 0;
 }

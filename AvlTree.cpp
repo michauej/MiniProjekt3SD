@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-Node::Node(int k, int v) : key(k), value(v), height(1), left(nullptr), right(nullptr) {}
+Node::Node( int v) :  value(v), height(1), left(nullptr), right(nullptr) {}
 
 AvlTree::AvlTree() : root(nullptr) {}
 AvlTree::~AvlTree() {}
@@ -57,14 +57,14 @@ Node* AvlTree::balance(Node* node) {
     return node;
 }
 
-Node* AvlTree::insert(Node* node, int key, int value) {
+Node* AvlTree::insert(Node* node, int value) {
     if (!node)
-        return new Node(key, value);
+        return new Node(value);
 
-    if (key < node->key)
-        node->left = insert(node->left, key, value);
-    else if (key > node->key)
-        node->right = insert(node->right, key, value);
+    if (value < node->value)
+        node->left = insert(node->left, value);
+    else if (value > node->value)
+        node->right = insert(node->right,  value);
     else {
         node->value = value;
         return node;
@@ -83,9 +83,9 @@ Node* AvlTree::remove(Node* node, int key) {
     if (!node)
         return nullptr;
 
-    if (key < node->key)
+    if (key < node->value)
         node->left = remove(node->left, key);
-    else if (key > node->key)
+    else if (key > node->value)
         node->right = remove(node->right, key);
     else {
         if (!node->left || !node->right) {
@@ -95,9 +95,9 @@ Node* AvlTree::remove(Node* node, int key) {
         }
         else {
             Node* temp = getMinValueNode(node->right);
-            node->key = temp->key;
             node->value = temp->value;
-            node->right = remove(node->right, temp->key);
+            node->value = temp->value;
+            node->right = remove(node->right, temp->value);
         }
     }
 
@@ -111,8 +111,8 @@ void AvlTree::inOrder(Node* node) {
     inOrder(node->right);
 }
 
-void AvlTree::insert(int key, int value) {
-    root = insert(root, key, value);
+void AvlTree::insert(int value) {
+    root = insert(root, value);
 }
 
 void AvlTree::remove(int key) {

@@ -1,13 +1,12 @@
 #pragma once
 
 struct Node {
-    int key;
     int value;
     int height;
     Node* left;
     Node* right;
 
-    Node(int k, int v);
+    Node( int v);
 };
 
 class AvlTree {
@@ -21,8 +20,8 @@ private:
     Node* rotateLeft(Node* node);
     Node* rotateRight(Node* node);
 
-    Node* insert(Node* node, int key, int value);
-    Node* remove(Node* node, int key);
+    Node* insert(Node* node,  int value);
+    Node* remove(Node* node, int value);
     Node* getMinValueNode(Node* node);
 
     Node* balance(Node* node);
@@ -33,7 +32,7 @@ public:
     AvlTree();
     ~AvlTree();
 
-    void insert(int key, int value);
-    void remove(int key);
+    void insert(int value);
+    void remove(int value);
     void inOrder();
 };

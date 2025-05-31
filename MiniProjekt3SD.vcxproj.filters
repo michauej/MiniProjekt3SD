@@ -21,12 +21,24 @@
     <ClCompile Include="OpenAddressingHashTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AvlTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AvlHashTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenAddressingHashTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AvlTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AvlHashTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
