@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AvlTree.cpp" />
     <ClCompile Include="MiniProjekt3SD.cpp" />
     <ClCompile Include="OpenAddressingHashTable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AvlTree.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="OpenAddressingHashTable.h" />
   </ItemGroup>
