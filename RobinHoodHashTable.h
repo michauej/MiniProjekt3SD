@@ -3,20 +3,27 @@
 #include <vector>
 #include <utility>
 
-class OpenAddressingHashTable : public HashTable {
+class RobinHoodHashTable : public HashTable {
 private:
-    std::vector<std::pair<int, int>> table;
-    std::vector<bool> occupied;
+    struct Entry {
+        int key;
+        int value;
+        bool occupied;
+        int probeDistance;
+
+        Entry() : key(-1), value(-1), occupied(false), probeDistance(0) {}
+    };
+
+    std::vector<Entry> table;
     int capacity;
     int size;
     const float loadFactorThreshold = 0.7f;
 
     int hashFunction(int key) const;
-    int linearProbing(int key) const;
     void resize();
 
 public:
-    OpenAddressingHashTable(int size);
+    RobinHoodHashTable(int size);
     void insert(int key, int value) override;
     int search(int key) override;
     void remove(int key) override;
