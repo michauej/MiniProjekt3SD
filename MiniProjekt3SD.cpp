@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OpenAddressingHashTable.h"
 #include "AvlHashTable.h"
+#include "Test.h"
 
 void printMenu(HashTable& hashTable) {
     std::cout << "\n--- MENU ---\n";
