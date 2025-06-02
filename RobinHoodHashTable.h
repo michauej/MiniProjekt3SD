@@ -1,18 +1,26 @@
-#ifndef ROBINHOODHASHTABLE_H
-#define ROBINHOODHASHTABLE_H
-
+#pragma once
+#include "HashTable.h"
 #include <vector>
 #include <utility>
-#include "HashTable.h"
 
 class RobinHoodHashTable : public HashTable {
 private:
-    std::vector<std::pair<int, int>> table;
-    std::vector<int> distance;
-    std::vector<bool> occupied;
-    int capacity;
+    struct Entry {
+        int key;
+        int value;
+        bool occupied;
+        int probeDistance;
 
-    int hashFunction(int key);
+        Entry() : key(-1), value(-1), occupied(false), probeDistance(0) {}
+    };
+
+    std::vector<Entry> table;
+    int capacity;
+    int size;
+    const float loadFactorThreshold = 0.7f;
+
+    int hashFunction(int key) const;
+    void resize();
 
 public:
     RobinHoodHashTable(int size);
@@ -20,5 +28,3 @@ public:
     int search(int key) override;
     void remove(int key) override;
 };
-
-#endif 
