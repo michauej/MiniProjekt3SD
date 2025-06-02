@@ -131,12 +131,14 @@
     <ClCompile Include="AvlTree.cpp" />
     <ClCompile Include="MiniProjekt3SD.cpp" />
     <ClCompile Include="OpenAddressingHashTable.cpp" />
+    <ClCompile Include="RobinHoodHashTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AvlHashTable.h" />
     <ClInclude Include="AvlTree.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="OpenAddressingHashTable.h" />
+    <ClInclude Include="RobinHoodHashTable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
