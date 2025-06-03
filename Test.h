@@ -6,6 +6,7 @@
 #include <iostream>
 #include "OpenAddressingHashTable.h"
 #include "AvlHashTable.h"
+#include "ChainingHashTable.h"
 #include "HashTable.h"
 
 using namespace std;
