@@ -2,7 +2,7 @@
 #include "OpenAddressingHashTable.h"
 #include "AvlHashTable.h"
 #include "Test.h"
-#include "RobinHoodHashTable.h"
+#include "ChainingHashTable.h"
 
 void printMenu(HashTable& hashTable) {
     std::cout << "\n--- MENU ---\n";
@@ -58,14 +58,14 @@ int main() {
 
     std::cout << "1. open addressing\n";
     std::cout << "2. avl\n";
-    std::cout << "3. robin hood\n";
+    std::cout << "3. chaining table\n";
     std::cout << "Wybierz rodzaj tablicy: ";
     int whichHashTable;
     std::cin >> whichHashTable;
 
     OpenAddressingHashTable openTable(size);
     AvlHashTable avlTable(size);
-    RobinHoodHashTable robinTable(size);
+    ChainingHashTable chainTable(size);
 
     switch (whichHashTable) {
     case 1:
@@ -75,7 +75,7 @@ int main() {
         menu(avlTable);
         break;
     case 3:
-        menu(robinTable);
+        menu(chainTable);
         break;
     default:
         std::cout << "Niepoprawny wybor, domyslnie uzywam AVL.\n";

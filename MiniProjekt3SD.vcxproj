@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="AvlHashTable.cpp" />
     <ClCompile Include="AvlTree.cpp" />
+    <ClCompile Include="ChainingHashTable.cpp" />
     <ClCompile Include="MiniProjekt3SD.cpp" />
     <ClCompile Include="OpenAddressingHashTable.cpp" />
     <ClCompile Include="RobinHoodHashTable.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AvlHashTable.h" />
     <ClInclude Include="AvlTree.h" />
+    <ClInclude Include="ChainingHashTable.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="OpenAddressingHashTable.h" />
     <ClInclude Include="RobinHoodHashTable.h" />
