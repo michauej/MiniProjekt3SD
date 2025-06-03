@@ -12,7 +12,7 @@ int AvlHashTable::hash(int key) const {
 }
 
 void AvlHashTable::insert(int key, int value) {
-    buckets[hash(key)].insert( value);
+    buckets[hash(key)].insert(key, value);
 }
 
 int AvlHashTable::search(int key) {
