@@ -12,7 +12,8 @@
 using namespace std;
 using namespace std::chrono;
 
-void test();
+void testInsert();
+void testRemove();
 
 
 
