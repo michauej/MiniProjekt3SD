@@ -1,65 +1,82 @@
-#include "ChainingHashTable.h"
-#include <algorithm>
+﻿#include "ChainingHashTable.h"
 
 ChainingHashTable::ChainingHashTable(int capacity)
     : capacity(capacity), size(0) {
-    buckets.resize(capacity);
+    buckets = new ElementOfChain * [capacity];
+    for (int i = 0; i < capacity; ++i) {
+        buckets[i] = nullptr;
+    }
+}
+
+ChainingHashTable::~ChainingHashTable() {
+    deleteChains();
+    delete[] buckets;
+}
+
+void ChainingHashTable::deleteChains() {
+    for (int i = 0; i < capacity; ++i) {
+        ElementOfChain* current = buckets[i];
+        while (current != nullptr) {
+            ElementOfChain* toDelete = current;
+            current = current->next;
+            delete toDelete;
+        }
+    }
 }
 
 int ChainingHashTable::hash(int key) const {
     return key % capacity;
 }
-
-void ChainingHashTable::resize() {
-    int newCapacity = capacity * 2;
-    std::vector<std::list<std::pair<int, int>>> newBuckets(newCapacity);
-
-    for (const auto& chain : buckets) {
-        for (const auto& entry : chain) {
-            int newIndex = entry.first % newCapacity;
-            newBuckets[newIndex].push_back(entry);
-        }
-    }
-
-    buckets = std::move(newBuckets);
-    capacity = newCapacity;
-}
-
 void ChainingHashTable::insert(int key, int value) {
-    if ((float)(size + 1) / capacity > loadFactorThreshold) {
-        resize();
-    }
 
     int index = hash(key);
-    for (auto& entry : buckets[index]) {
-        if (entry.first == key) {
-            entry.second = value;  // Aktualizacja, je�li klucz istnieje
+    ElementOfChain* current = buckets[index];
+
+    while (current != nullptr) {
+        if (current->key == key) {
+            current->value = value; // Aktualizacja, jeœli klucz istnieje
             return;
         }
+        current = current->next;
     }
 
-    buckets[index].emplace_back(key, value);
+    ElementOfChain* newEntry = new ElementOfChain{ key, value, buckets[index] };
+    buckets[index] = newEntry;
     size++;
 }
 
 int ChainingHashTable::search(int key) {
     int index = hash(key);
-    for (const auto& entry : buckets[index]) {
-        if (entry.first == key) {
-            return entry.second;
+    ElementOfChain* current = buckets[index];
+
+    while (current != nullptr) {
+        if (current->key == key) {
+            return current->value;
         }
+        current = current->next;
     }
-    return -1;  
+
+    return -1;
 }
 
 void ChainingHashTable::remove(int key) {
     int index = hash(key);
-    auto& chain = buckets[index];
-    for (auto it = chain.begin(); it != chain.end(); ++it) {
-        if (it->first == key) {
-            chain.erase(it);
+    ElementOfChain* current = buckets[index];
+    ElementOfChain* prev = nullptr;
+
+    while (current != nullptr) {
+        if (current->key == key) {
+            if (prev == nullptr) {
+                buckets[index] = current->next;
+            }
+            else {
+                prev->next = current->next;
+            }
+            delete current;
             size--;
             return;
         }
+        prev = current;
+        current = current->next;
     }
 }

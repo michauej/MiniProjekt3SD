@@ -1,12 +1,14 @@
 #pragma once
-#include "HashTable.h"
-#include <vector>
-#include <utility>
 
-class OpenAddressingHashTable : public HashTable {
-private:
-    std::vector<std::pair<int, int>> table;
-    std::vector<bool> occupied;
+struct Entry {
+    int key;
+    int value;
+};
+
+class OpenAddressingHashTable {
+public:
+    Entry* table;
+    bool* occupied;
     int capacity;
     int size;
     const float loadFactorThreshold = 0.7f;
@@ -17,7 +19,8 @@ private:
 
 public:
     OpenAddressingHashTable(int size);
-    void insert(int key, int value) override;
-    int search(int key) override;
-    void remove(int key) override;
+    ~OpenAddressingHashTable();
+    void insert(int key, int value);
+    int search(int key);
+    void remove(int key);
 };

@@ -1,20 +1,25 @@
-#pragma once
+﻿#pragma once
 #include "HashTable.h"
-#include <list>
-#include <vector>
+
+struct ElementOfChain {
+    int key;
+    int value;
+    ElementOfChain* next;
+};
 
 class ChainingHashTable : public HashTable {
 private:
-    std::vector<std::list<std::pair<int, int>>> buckets;
+    ElementOfChain** buckets;
     int capacity;
     int size;
-    const float loadFactorThreshold = 1.0f;  
 
     int hash(int key) const;
-    void resize();
+    void deleteChains();
 
 public:
     ChainingHashTable(int capacity);
+    ~ChainingHashTable();
+
     void insert(int key, int value) override;
     int search(int key) override;
     void remove(int key) override;

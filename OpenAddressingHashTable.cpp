@@ -1,9 +1,18 @@
 #include "OpenAddressingHashTable.h"
-
 OpenAddressingHashTable::OpenAddressingHashTable(int size)
     : capacity(size), size(0) {
-    table.resize(capacity, std::make_pair(-1, -1));
-    occupied.resize(capacity, false);
+    table = new Entry[capacity];
+    occupied = new bool[capacity];
+    for (int i = 0; i < capacity; i++) {
+        table[i].key = -1;
+        table[i].value = -1;
+        occupied[i] = false;
+    }
+}
+
+OpenAddressingHashTable::~OpenAddressingHashTable() {
+    delete[] table;
+    delete[] occupied;
 }
 
 int OpenAddressingHashTable::hashFunction(int key) const {
@@ -12,10 +21,12 @@ int OpenAddressingHashTable::hashFunction(int key) const {
 
 int OpenAddressingHashTable::linearProbing(int key) const {
     int index = hashFunction(key);
+    int step = 1 + (key % (capacity - 1));
     int i = 0;
-    while (occupied[(index + i) % capacity] && table[(index + i) % capacity].first != key) {
+    while (occupied[(index + i * step) % capacity] && table[(index + i * step) % capacity].key != key) {
         i++;
     }
+
     return (index + i) % capacity;
 }
 
@@ -24,19 +35,25 @@ void OpenAddressingHashTable::resize() {
     capacity *= 2;
     size = 0;
 
-    std::vector<std::pair<int, int>> oldTable = table;
-    std::vector<bool> oldOccupied = occupied;
+    Entry* oldTable = table;
+    bool* oldOccupied = occupied;
 
-    table.clear();
-    occupied.clear();
-    table.resize(capacity, std::make_pair(-1, -1));
-    occupied.resize(capacity, false);
+    table = new Entry[capacity];
+    occupied = new bool[capacity];
+    for (int i = 0; i < capacity; i++) {
+        table[i].key = -1;
+        table[i].value = -1;
+        occupied[i] = false;
+    }
 
-    for (int i = 0; i < oldCapacity; ++i) {
+    for (int i = 0; i < oldCapacity; i++) {
         if (oldOccupied[i]) {
-            insert(oldTable[i].first, oldTable[i].second);
+            insert(oldTable[i].key, oldTable[i].value);
         }
     }
+
+    delete[] oldTable;
+    delete[] oldOccupied;
 }
 
 void OpenAddressingHashTable::insert(int key, int value) {
@@ -46,21 +63,23 @@ void OpenAddressingHashTable::insert(int key, int value) {
 
     int index = linearProbing(key);
     if (!occupied[index]) size++;
-    table[index] = std::make_pair(key, value);
+    table[index].key = key;
+    table[index].value = value;
     occupied[index] = true;
 }
 
 int OpenAddressingHashTable::search(int key) {
     int index = linearProbing(key);
-    if (occupied[index] && table[index].first == key)
-        return table[index].second;
+    if (occupied[index] && table[index].key == key)
+        return table[index].value;
     return -1;
 }
 
 void OpenAddressingHashTable::remove(int key) {
     int index = linearProbing(key);
-    if (occupied[index] && table[index].first == key) {
-        table[index] = std::make_pair(-1, -1);
+    if (occupied[index] && table[index].key == key) {
+        table[index].key = -1;
+        table[index].value = -1;
         occupied[index] = false;
         size--;
     }

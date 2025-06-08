@@ -52,6 +52,7 @@ void menu(HashTable& hashTable) {
 }
 
 int main() {
+    /*
     int size;
     std::cout << "Podaj rozmiar tablicy mieszajacej: ";
     std::cin >> size;
@@ -82,6 +83,8 @@ int main() {
         menu(avlTable);
         break;
     }
-
+    */
+    //testInsert();
+    testRemove();
     return 0;
 }

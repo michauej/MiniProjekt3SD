@@ -132,7 +132,6 @@
     <ClCompile Include="ChainingHashTable.cpp" />
     <ClCompile Include="MiniProjekt3SD.cpp" />
     <ClCompile Include="OpenAddressingHashTable.cpp" />
-    <ClCompile Include="RobinHoodHashTable.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +140,6 @@
     <ClInclude Include="ChainingHashTable.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="OpenAddressingHashTable.h" />
-    <ClInclude Include="RobinHoodHashTable.h" />
     <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

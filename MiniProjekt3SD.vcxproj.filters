@@ -30,9 +30,6 @@
     <ClCompile Include="Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RobinHoodHashTable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ChainingHashTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RobinHoodHashTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ChainingHashTable.h">
