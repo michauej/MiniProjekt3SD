@@ -6,7 +6,18 @@ using namespace std;
 Node::Node(int k, int v) : key(k), value(v), height(1), left(nullptr), right(nullptr) {}
 
 AvlTree::AvlTree() : root(nullptr) {}
-AvlTree::~AvlTree() {}
+AvlTree::~AvlTree() {
+    destroyTree(root);
+}
+
+
+void AvlTree::destroyTree(Node* node) {
+    if (node != nullptr) {
+        destroyTree(node->left);
+        destroyTree(node->right);
+        delete node;
+    }
+}
 
 int AvlTree::getHeight(Node* node) {
     return node ? node->height : 0;

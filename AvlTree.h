@@ -13,7 +13,7 @@ struct Node {
 class AvlTree {
 private:
     Node* root;
-
+    void destroyTree(Node* node);
     int getHeight(Node* node);
     void updateHeight(Node* node);
     int getBalance(Node* node);
