@@ -15,13 +15,13 @@ vector<pair<int, int>> generateDataset(int size) {
 const int DATASET_COUNT = 100;
 const int repeat = 10;
 int sizes[] = { 1000 };
-float multiFactors[] = { 0.25, 0.5, 1, 2, 4, 8, 16, 32,50, 64,80,100,128,256, 512 };
+float multiFactors[] = { 0.25, 0.5, 1, 2, 4, 8, 16, 32,50, 64,80,100,128,150, 170, 200,256 };
 void testInsert() {
 
     cout << "=== INSERT TEST elementow===" << endl;
     cout << "Size\tOpen(us)\tChaining(us)\tAvl(us)" << endl;
     for (int s = 0; s < 1; s++) {
-        for (int m = 0; m < 15; m++) {
+        for (int m = 0; m < 17; m++) {
             int size = sizes[s];
             float multiFactor = multiFactors[m];
             long long OpenTotal = 0;
@@ -72,7 +72,7 @@ void testRemove() {
     cout << "=== Remove TEST elementow===" << endl;
     cout << "Size\tOpen(us)\tChaining(us)\tAvl(us)" << endl;
     for (int s = 0; s < 1; s++) {
-        for (int m = 0; m < 15; m++) {
+        for (int m = 0; m < 17; m++) {
             int size = sizes[s];
             float multiFactor = multiFactors[m];
             long long OpenTotal = 0;

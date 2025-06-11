@@ -27,7 +27,7 @@ int OpenAddressingHashTable::linearProbing(int key) const {
         i++;
     }
 
-    return (index + i) % capacity;
+    return (index + i*step) % capacity;
 }
 
 void OpenAddressingHashTable::resize() {

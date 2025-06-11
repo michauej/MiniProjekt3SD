@@ -84,7 +84,7 @@ int main() {
         break;
     }
     */
-    //testInsert();
+    testInsert();
     testRemove();
     return 0;
 }
